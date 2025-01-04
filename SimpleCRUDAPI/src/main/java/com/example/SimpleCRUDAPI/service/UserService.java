@@ -42,6 +42,11 @@ public class UserService {
         return user.orElse(null);
     }
 
+    // Get a user by username
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     // Update a user
     public User updateUser(Long id, User user) {
         // here, the Optional and User classes are used to return the user object if it is present in the database, otherwise it returns null.
