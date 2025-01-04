@@ -28,7 +28,8 @@ public class AuthenticationController {
 
     /**
      * The login method handles POST requests to the "/auth/login" endpoint.
-     * It accepts username and password, validates them, and returns a JWT token if valid.
+     * It accepts username and password, validates them, and returns a JWT token if
+     * valid.
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
@@ -37,7 +38,8 @@ public class AuthenticationController {
 
         // Step 2: Check if the user exists and the password matches.
         if (user == null || !user.getPassword().equals(password)) {
-            // If the user doesn't exist or the password is incorrect, return a 401 Unauthorized status.
+            // If the user doesn't exist or the password is incorrect, return a 401
+            // Unauthorized status.
             return ResponseEntity.status(401).body("Invalid username or password");
         }
 
