@@ -30,13 +30,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 // Importing ServletException, which is thrown when there are issues with the servlet or filter processing.
 import jakarta.servlet.ServletException;
 
-// Importing NonNull annotation to indicate that a parameter, field, or method return value can never be null.
+/* Importing NonNull annotation to indicate that a parameter, field, or method
+return value can never be null.*/
 import org.springframework.lang.NonNull;
 
 // Marking the class as a Spring component so Spring can manage it.
 @Component
-// Extending OncePerRequestFilter ensures our filter is applied once per
-// request.
+/*  Extending OncePerRequestFilter ensures our filter is applied once per
+ request */
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     // Injecting JwtUtil to utilize the JWT validation methods.
