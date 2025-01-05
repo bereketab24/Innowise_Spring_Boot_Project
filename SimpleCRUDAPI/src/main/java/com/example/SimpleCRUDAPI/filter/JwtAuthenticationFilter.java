@@ -15,7 +15,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 // Marking the class as a Spring-managed component to allow Spring to automatically detect and manage it.
 import org.springframework.stereotype.Component;
 
-
 // Importing the FilterChain interface that allows us to pass control to the next filter or the endpoint in the chain.
 import jakarta.servlet.FilterChain;
 
@@ -83,7 +82,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                     // Step 4: Setting the authentication token in the Spring Security context.
                     // This tells Spring Security that the user is authenticated.
-                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    if (SecurityContextHolder.getContext().getAuthentication() == null) {
+                        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    } else {
+                        System.out.println("User is already authenticated");
+                    }
                 }
             } catch (Exception e) {
                 // Step 5: If there's any error while validating the token, log the exception
