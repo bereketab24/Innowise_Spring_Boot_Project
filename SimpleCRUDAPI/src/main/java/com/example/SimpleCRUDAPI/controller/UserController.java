@@ -42,13 +42,13 @@ public class UserController {
     // The ReponseEntity class represents an HTTP response, including headers, body,
     // and status and also it is used to return the response body in this case the
     // User object.
-    // The @RequestBody annotation extracts the User object from the request bod and
+    // The @RequestBody annotation extracts the User object from the request body and
     // maps it to the user parameter.
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
         // Encrypt the password before saving it to the database
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         User newUser = userService.createUser(user);
-        return ResponseEntity.status(201).body(newUser);
+        return ResponseEntity.status(201).body( "User created successfully");
     }
 
     // Login a user and return a JWT token
@@ -83,7 +83,7 @@ public class UserController {
     }
 
     // Get a user by id
-    @GetMapping("/{id}")
+    @GetMapping("/users/{id}")
     @PreAuthorize("isAuthenticated()")
     // The @PathVariable annotation is used to extract the value of a URI template
     // variable and map it to the method parameter.
@@ -93,7 +93,7 @@ public class UserController {
     }
 
     // Update a user
-    @PutMapping("/{id}")
+    @PutMapping("/users/{id}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
@@ -101,7 +101,7 @@ public class UserController {
     }
 
     // Delete a user
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/users/{id}")
     @PreAuthorize("isAuthenticated()")
     // Here, the ResponseEntity class is used to return a response with no content.
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
