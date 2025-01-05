@@ -15,20 +15,9 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 // Marking the class as a Spring-managed component to allow Spring to automatically detect and manage it.
 import org.springframework.stereotype.Component;
 
-// Importing the required classes for servlet-based filtering mechanisms.
-import jakarta.servlet.Filter;
 
 // Importing the FilterChain interface that allows us to pass control to the next filter or the endpoint in the chain.
 import jakarta.servlet.FilterChain;
-
-// Importing FilterConfig, which is used to configure the filter (optional).
-import jakarta.servlet.FilterConfig;
-
-// Importing ServletRequest to represent the HTTP request that is passed to the filter.
-import jakarta.servlet.ServletRequest;
-
-// Importing ServletResponse to represent the HTTP response that is passed to the filter.
-import jakarta.servlet.ServletResponse;
 
 // Importing HttpServletRequest, which is the subclass of ServletRequest used specifically for handling HTTP requests (e.g., retrieving headers).
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +30,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 // Importing ServletException, which is thrown when there are issues with the servlet or filter processing.
 import jakarta.servlet.ServletException;
+
+// Importing NonNull annotation to indicate that a parameter, field, or method return value can never be null.
+import org.springframework.lang.NonNull;
 
 // Marking the class as a Spring component so Spring can manage it.
 @Component
@@ -58,8 +50,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     // The core method where we check for the token and validate it.
     @Override
-    protected void doFilterInternal(HttpServletRequest request, jakarta.servlet.http.HttpServletResponse response,
-            FilterChain filterChain)
+    protected void doFilterInternal(@NonNull HttpServletRequest request,
+            @NonNull jakarta.servlet.http.HttpServletResponse response,
+            @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
         // Step 1: Extracting the JWT token from the Authorization header.
@@ -104,11 +97,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         // Without this line, the request would be stuck at this filter and never reach
         // the actual endpoint.
         filterChain.doFilter(request, response);
-    }
-
-    // Optional: Cleanup resources when the filter is destroyed.
-    @Override
-    public void destroy() {
-        // You can release resources here if necessary.
     }
 }
