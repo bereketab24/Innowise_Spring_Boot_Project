@@ -83,13 +83,15 @@ You can test the API using tools like [Postman](https://www.postman.com/).
 
 #### 1. **Register a New User**
 - **Endpoint**: `POST /register`
-- **Body (JSON)**:
+- **Request Body (JSON)**:
   ```json
   {
     "username": "testuser",
     "password": "password123"
   }
   ```
+  - **Expected Response**:
+  
 
 #### 2. **Log In**
 - **Endpoint**: `POST /login`
