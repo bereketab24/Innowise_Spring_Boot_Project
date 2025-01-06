@@ -47,6 +47,11 @@ public class UserController {
     public ResponseEntity<String> createUser(@RequestBody User user) {
         // Encrypt the password before saving it to the database
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+        // Check if the user already exists
+        if (userService.getUserByUsername(user.getUsername()) != null) {
+            return ResponseEntity.status(409).body("User already exists! Please login");
+        }
         User newUser = userService.createUser(user);
         return ResponseEntity.status(201).body( "User created successfully");
     }
@@ -69,7 +74,6 @@ public class UserController {
     // Get all users
     // The GetMapping annotation maps HTTP GET requests onto specific handler
     // methods.
-
     @GetMapping("/users")
     // The @PreAuthorize annotation is used to secure the getUsers method by allowing only authenticated users to access it.
     @PreAuthorize("isAuthenticated()")
@@ -95,18 +99,18 @@ public class UserController {
     // Update a user
     @PutMapping("/users/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+    public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
-        return updatedUser != null ? ResponseEntity.ok(updatedUser) : ResponseEntity.notFound().build();
+        return updatedUser != null ? ResponseEntity.ok("User Updated Successfully") : ResponseEntity.status(404).body("User not found");
     }
 
     // Delete a user
     @DeleteMapping("/users/{id}")
     @PreAuthorize("isAuthenticated()")
     // Here, the ResponseEntity class is used to return a response with no content.
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
         boolean deleted = userService.deleteUser(id);
-        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+        return deleted ? ResponseEntity.noContent().build() : ResponseEntity.status(404).body("User not found");
     }
 
 }
