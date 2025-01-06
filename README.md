@@ -46,8 +46,13 @@ mvn clean install
 ```
 
 ### 5. Set Up and Run PostgreSQL in Docker
-[Install Docker](https://www.docker.com/products/docker-desktop)
-Run the following command to create and start a PostgreSQL container:
+- [Install Docker](https://www.docker.com/products/docker-desktop) from Docker's official website.
+- Pull the PostgreSQL Docker image: Once Docker is installed, you need to pull the PostgreSQL image. Open a terminal and run the following command:
+```bash
+docker pull postgres
+```
+
+- Run the following command to create and start a PostgreSQL container:
 ```bash
 docker run --name postgres-db \
   -e POSTGRES_DB=CRUDAPI \
