@@ -30,7 +30,7 @@ Make sure the following are installed on your system:
 ### 2. Clone the Repository
 Clone the project from GitHub:
 ```bash
-git clone <repository-url>
+git clone https://github.com/bereketab24/Innowise_Spring_Boot_Project.git
 ```
 
 ### 3. Navigate to the Project Directory
