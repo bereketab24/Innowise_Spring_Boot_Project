@@ -10,6 +10,7 @@ This project is a simple CRUD API built using the Spring Boot framework as part 
   - `POST /register` - Register a new user.
   - `POST /login` - Log in and receive a JWT token.
   - `GET /users` - Retrieve all registered users (requires authentication).
+  - `GET /users/{id}` - Retrieve registered users by their ID (requires authentication).
   - `PUT /users/{id}` - Update a user by ID (requires authentication).
   - `DELETE /users/{id}` - Delete a user by ID (requires authentication).
 - **JWT Authentication**: Protects endpoints for authorized users only.
@@ -90,7 +91,9 @@ You can test the API using tools like [Postman](https://www.postman.com/).
     "password": "password123"
   }
   ```
-  - **Expected Response**:
+- **Expected Response**:   
+  - **201 Created**:  "User created successfully"
+  - **409 Conflict**: "User already exists! Please login"
   
 
 #### 2. **Log In**
@@ -102,7 +105,9 @@ You can test the API using tools like [Postman](https://www.postman.com/).
     "password": "password123"
   }
   ```
-- **Response**: A JWT token.
+- **Expected Response**:
+  - **200 Ok**:  Bearer token returned for authentication.
+  - **401 Unauthorized**: "Invalid username or password"
 
 #### 3. **Get All Users** (Requires Authentication)
 - **Endpoint**: `GET /users`
@@ -112,8 +117,42 @@ You can test the API using tools like [Postman](https://www.postman.com/).
     "Authorization": "Bearer <JWT-TOKEN>"
   }
   ```
+- **Expected Response**:
+  - **200 Ok**:  List of users.
+  - **404 Not Found**: No users found.
 
-#### 4. **Delete a User** (Requires Authentication)
+#### 4. **Get Users by ID** (Requires Authentication)
+- **Endpoint**: `GET /users/{id}`
+- **Headers**:
+  ```json
+  {
+    "Authorization": "Bearer <JWT-TOKEN>"
+  }
+  ```
+- **Expected Response**:
+  - **200 Ok**:  User's data.
+  - **404 Not Found**: No users found.
+
+#### 5. **Update User's data** (Requires Authentication)
+- **Endpoint**: `PUT /users/{id}`
+- **Headers**:
+  ```json
+  {
+    "Authorization": "Bearer <JWT-TOKEN>"
+  }
+  ```
+- **Body (JSON)**:
+  ```json
+  {
+    "username": "testuser",
+    "password": "password123"
+  }
+  ```
+- **Expected Response**:
+  - **200 Ok**:  "User Updated Successfully"
+  - **404 Not Found**: "User not found"
+  
+#### 5. **Delete a User** (Requires Authentication)
 - **Endpoint**: `DELETE /users/{id}`
 - **Headers**:
   ```json
@@ -121,7 +160,9 @@ You can test the API using tools like [Postman](https://www.postman.com/).
     "Authorization": "Bearer <JWT-TOKEN>"
   }
   ```
-
+- **Expected Response**:
+  - **204 No Content**: 
+  - **404 Not Found**: "User not found"
 ---
 
 ## Configuring the Application
