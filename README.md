@@ -199,5 +199,5 @@ If you want to use different database credentials or JWT secrets, update the `ap
 ---
 
 ## License
-This project is for educational purposes as part of an internship program.
+This project is developed by Bereketab for educational purposes as part of an internship program at Innowise Group.
 
