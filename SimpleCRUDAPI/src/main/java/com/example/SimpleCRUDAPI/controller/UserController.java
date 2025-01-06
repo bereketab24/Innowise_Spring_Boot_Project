@@ -42,7 +42,8 @@ public class UserController {
     // The ReponseEntity class represents an HTTP response, including headers, body,
     // and status and also it is used to return the response body in this case the
     // User object.
-    // The @RequestBody annotation extracts the User object from the request body and
+    // The @RequestBody annotation extracts the User object from the request body
+    // and
     // maps it to the user parameter.
     public ResponseEntity<String> createUser(@RequestBody User user) {
         // Encrypt the password before saving it to the database
@@ -53,7 +54,7 @@ public class UserController {
             return ResponseEntity.status(409).body("User already exists! Please login");
         }
         User newUser = userService.createUser(user);
-        return ResponseEntity.status(201).body( "User created successfully");
+        return ResponseEntity.status(201).body("User created successfully");
     }
 
     // Login a user and return a JWT token
@@ -70,12 +71,12 @@ public class UserController {
         return ResponseEntity.status(401).body("Invalid username or password");
     }
 
-
     // Get all users
     // The GetMapping annotation maps HTTP GET requests onto specific handler
     // methods.
     @GetMapping("/users")
-    // The @PreAuthorize annotation is used to secure the getUsers method by allowing only authenticated users to access it.
+    // The @PreAuthorize annotation is used to secure the getUsers method by
+    // allowing only authenticated users to access it.
     @PreAuthorize("isAuthenticated()")
     // The getUsers method returns a list of all users.
     public ResponseEntity<List<User>> getUsers() {
@@ -101,7 +102,8 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
-        return updatedUser != null ? ResponseEntity.ok("User Updated Successfully") : ResponseEntity.status(404).body("User not found");
+        return updatedUser != null ? ResponseEntity.ok("User Updated Successfully")
+                : ResponseEntity.status(404).body("User not found");
     }
 
     // Delete a user
