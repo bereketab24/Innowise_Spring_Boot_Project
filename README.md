@@ -55,12 +55,7 @@ docker pull postgres
 
 - Run the following command to create and start a PostgreSQL container:
 ```bash
-docker run --name postgres-db \
-  -e POSTGRES_DB=CRUDAPI \
-  -e POSTGRES_USER=bereketab24 \
-  -e POSTGRES_PASSWORD=bereketab24 \
-  -p 5432:5432 \
-  -d postgres
+docker run --name postgres-db -e POSTGRES_DB=CRUDAPI -e POSTGRES_USER=bereketab24 -e POSTGRES_PASSWORD=bereketab24 -p 5432:5432 -d postgres
 ```
 - **Explanation of the command:**
   - `POSTGRES_DB=CRUDAPI`: The name of the database.
