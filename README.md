@@ -1,4 +1,4 @@
-# Simple CRUD API with Authentication
+# Simple CRUD API with Spring-boot
 
 ## Overview
 This project is a simple CRUD API built using the Spring Boot framework as part of internship at Innowise Group. It allows users to create accounts, log in, view a list of users, and delete users by their ID. The API also includes authentication using JWT (JSON Web Tokens) to ensure that viewing, updating and deleting users can only be performed by authenticated users. PostgreSQL is used as the database, and Docker is utilized to run the PostgreSQL container.
