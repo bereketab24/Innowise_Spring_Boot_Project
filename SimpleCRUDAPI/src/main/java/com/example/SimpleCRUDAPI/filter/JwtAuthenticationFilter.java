@@ -55,7 +55,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain)
             throws ServletException, IOException {
 
-        // Step 1: Extracting the JWT token from the Authorization header.
+        //Extracting the JWT token from the Authorization header.
         // The Authorization header will look like: "Bearer <token>"
         String authorizationHeader = request.getHeader("Authorization");
 
@@ -64,12 +64,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String token = authorizationHeader.substring(7); // Extracting the token (without "Bearer ")
 
             try {
-                // Step 2: Validating the JWT token.
+                //Validating the JWT token.
                 // We call the validateToken method of JwtUtil, which will return the username
                 // if the token is valid.
                 String username = jwtUtil.validateToken(token);
 
-                // Step 3: If the username is not null (i.e., token is valid), create the
+                //If the username is not null (i.e., token is valid), create the
                 // authentication token.
                 if (username != null) {
                     // Creating the UsernamePasswordAuthenticationToken with the username.
@@ -81,7 +81,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     // Setting the details of the request (can be used for auditing or logging).
                     authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-                    // Step 4: Setting the authentication token in the Spring Security context.
+                    //Setting the authentication token in the Spring Security context.
                     // This tells Spring Security that the user is authenticated.
                     if (SecurityContextHolder.getContext().getAuthentication() == null) {
                         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
@@ -90,13 +90,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     }
                 }
             } catch (Exception e) {
-                // Step 5: If there's any error while validating the token, log the exception
+                //If there's any error while validating the token, log the exception
                 // (optional).
                 System.out.println("JWT validation failed: " + e.getMessage());
             }
         }
 
-        // Step 6: Continue processing the request chain. This is essential to allow the
+        // Continue processing the request chain. This is essential to allow the
         // request to proceed.
         // Without this line, the request would be stuck at this filter and never reach
         // the actual endpoint.
