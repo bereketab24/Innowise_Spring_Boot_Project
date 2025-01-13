@@ -42,11 +42,13 @@ public class JwtUtil {
         // time.
         return Jwts.builder()
                 .setSubject(username)
+                // claim() method adds a custom claim to the JWT token. In this case, we add the roles claim with the value "user". Claim is a piece of information added to the JWT token payload.
                 .claim("roles", "user")
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                 .signWith(key)
                 .compact();
+                // compact() method returns the JWT token as a string.
     }
 
     // The validateToken method validates the JWT token and returns the username if
@@ -58,9 +60,13 @@ public class JwtUtil {
             // token to extract the subject (username).
             return Jwts.parserBuilder()
                     .setSigningKey(key)
+                    // build() method returns a JwtParser instance which can be used to parse and validate the token.
                     .build()
+                    // parseClaimsJws() method parses the token
                     .parseClaimsJws(token)
+                    // getBody() method returns the body of the token which contains the claims.
                     .getBody()
+                    // getSubject() method returns the subject (username) from the claims.
                     .getSubject();
         } catch (JwtException e) {
             System.out.println("Invalid or expired token " + e.getMessage());
