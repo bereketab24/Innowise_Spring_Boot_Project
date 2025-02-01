@@ -27,12 +27,14 @@ public class SecurityConfig {
                 .requestMatchers("/register", "/login").permitAll() // Allow authentication endpoints
                 .anyRequest().authenticated() // Protect all other endpoints
                 )
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Add our custom
-                                                                                                      // filter
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class) // Add our custom JWT filter before the default filter
+                // .build is used to build the SecurityFilterChain. By building means it will create the SecurityFilterChain instance. it's like calling the constructor of the SecurityFilterChain class. it is like recursion. it will call the constructor of the SecurityFilterChain class and return the instance of the SecurityFilterChain class which is used to build the SecurityFilterChain. 
                 .build();
     }
 
+    // if there is no @Bean annotation, the method will not be registered as a bean in the Spring application context. The method will be executed but the return value will not be registered as a bean. which means you can't autowire the return value of the method in other classes.
     @Bean
+    // we need passwordEncoder bean to encode the password before saving it to the database.
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(); // Use BCrypt for password hashing
     }

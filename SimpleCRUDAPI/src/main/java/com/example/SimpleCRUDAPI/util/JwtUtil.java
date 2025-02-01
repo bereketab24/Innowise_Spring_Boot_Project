@@ -26,7 +26,7 @@ public class JwtUtil {
 
     @PostConstruct
     // The @PostConstruct annotation is used on a method that needs to be executed
-    // after dependency injection is done to perform any initialization.
+    // after dependency injection is done to perform any initialization. In this case, we use the @PostConstruct annotation to initialize the secret key.
     public void init() {
         // Generate the secret key from the secret string using the Keys.hmacShaKeyFor
         // method.
