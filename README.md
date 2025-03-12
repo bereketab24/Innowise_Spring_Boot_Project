@@ -23,7 +23,7 @@ Follow these steps to set up and run the application:
 
 ### 1. Prerequisites
 Make sure the following are installed on your system:
-- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (version 11 or higher)
+- [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) (version 23)
 - [Apache Maven](https://maven.apache.org/install.html)
 - [Git](https://git-scm.com/downloads)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
