@@ -61,7 +61,7 @@ docker run --name postgres-db -e POSTGRES_DB=CRUDAPI -e POSTGRES_USER=bereketab2
   - `POSTGRES_DB=CRUDAPI`: The name of the database.
   - `POSTGRES_USER=bereketab24`: The username for the database.
   - `POSTGRES_PASSWORD=bereketab24`: The password for the database.
-  - `-p 5433:5432`: Maps port 5432 of the container to port 5432 of your machine.
+  - `-p 5433:5432`: Maps port 5433 of the container to port 5432 of your machine.
 
 ### 6. Start the Spring Boot Application
 Run the application using Maven:
